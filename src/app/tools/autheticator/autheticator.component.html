@@ -1,0 +1,28 @@
+<mat-card id="home-form">
+     <mat-card-header>
+          <mat-card-title>
+               <h2>{{getStateText()}}</h2>
+          </mat-card-title>
+     </mat-card-header>
+     <div *ngIf="isSignUpState()" id="home-form-content">
+          <input placeholder="Email" class="home-input-form">
+          <input type="password" placeholder="Password" class="home-input-form">
+          <input type="password" placeholder="Confirm Password" class="home-input-form">
+          <button mat-raised-button color="warn">Sign up</button>
+     </div>
+     <div *ngIf="isLoginState()" id="home-form-content">
+          <input placeholder="Email" class="home-input-form">
+          <input type="password" placeholder="Password" class="home-input-form">
+          <button mat-raised-button color="warn">Login</button>
+     </div>
+
+     <div *ngIf="isForgotPasswordState()" id="home-form-content">
+          <input placeholder="Email" class="home-input-form">
+          <button mat-raised-button color="warn">Reset Password</button>
+     </div>
+     <mat-card-actions id="home-form-actions">
+          <button mat-button (click)="onCreateAccountClick()">Sign up</button>
+          <button mat-button (click)="onLoginClick()">Login</button>
+          <button mat-button (click)="onForgotPasswordClick()">Forgot Password</button>
+     </mat-card-actions>
+</mat-card>

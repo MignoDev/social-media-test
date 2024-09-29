@@ -1,0 +1,60 @@
+#home-page {
+     width: 100%;
+     height: 100%;
+     background-color: #101010;
+}
+
+#home-page-landing {
+     width: 100%;
+     height: 100%;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-template-rows: 100%;
+     min-height: 800px;
+     color: #ffffff;
+}
+
+#landing-left {
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+}
+
+#landing-right {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+#landing-left-buttons {
+     display: flex;
+     justify-content: flex-end;
+}
+
+#landing-left-content {
+     text-align: right;
+}
+
+#landing-left-content h1 {
+     font-size: 4rem;
+     ;
+}
+
+#landing-left-content p {
+     font-size: 1.5rem;
+}
+
+#landing-right-content {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 50%;
+}
+
+#home-form-container {
+     background-color: #1a1a1a;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
