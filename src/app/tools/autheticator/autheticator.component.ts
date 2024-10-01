@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-autheticator',
@@ -7,9 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AutheticatorComponent {
   state = AuthenticatorState.SignUp;
+  email: string;
+  password: string;
 
-  constructor() { }
-  ngOnInit(): void {
+  constructor() {
+    this.email = "";
+    this.password = "";
+  }
+
+  onLoginButtonClick() {
+    console.log(this.email);
+    console.log(this.password);
   }
 
   onCreateAccountClick() {
@@ -19,7 +28,6 @@ export class AutheticatorComponent {
 
   onLoginClick() {
     this.state = AuthenticatorState.Login;
-    console.log("Login Clicked");
   }
 
   onForgotPasswordClick() {

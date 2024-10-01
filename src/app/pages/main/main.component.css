@@ -1,0 +1,36 @@
+#main-body-grid {
+     display: grid;
+     grid-template-columns: 1fr 70% 1fr;
+     height: 100vh;
+}
+
+.main-sections {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background-color: #101010;
+     color: #ffffff;
+}
+
+#right-main-section {
+     justify-content: flex-start;
+     padding: 1rem 0;
+}
+
+#post {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: #1a1a1a;
+     width: 60%;
+     color: #ffffff;
+}
+
+#publish-post-container {
+     display: flex;
+     width: 100%;
+     justify-content: center;
+     margin: 1rem 0;
+     border-radius: 8px;
+}

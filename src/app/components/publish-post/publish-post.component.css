@@ -1,0 +1,50 @@
+#publish-post-form-group {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+}
+
+#post-content {
+     border-radius: 8px;
+}
+
+#post-description {
+     border-radius: 10px;
+     resize: none;
+     overflow: hidden;
+     font-size: medium;
+     height: 2rem;
+     transition: height 0.3s ease;
+     width: 100%;
+     box-sizing: border-box;
+}
+
+#publish-post-buttons {
+     display: flex;
+     flex-direction: row;
+}
+
+.file-input {
+     display: none;
+}
+
+#publish-post-form {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: #1a1a1a;
+     width: 60%;
+     color: #ffffff;
+     border-radius: 8px;
+}
+
+#publish-form {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     padding: 0.5rem 0.5rem;
+     margin: 0.5rem 0.5rem;
+}
