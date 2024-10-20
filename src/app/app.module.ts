@@ -19,6 +19,7 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { PostComponent } from './components/post/post.component';
 import { PublishPostComponent } from './components/publish-post/publish-post.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FriendComponent } from './components/friend/friend.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
     NavigationBarComponent,
     PostComponent,
     PublishPostComponent,
+    FriendComponent,
   ],
   imports: [
     BrowserModule,
