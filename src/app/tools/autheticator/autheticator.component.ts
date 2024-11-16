@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-autheticator',
   templateUrl: './autheticator.component.html',
-  styleUrl: './autheticator.component.css'
+  styleUrls: ['./autheticator.component.css']
 })
 export class AutheticatorComponent {
   state = AuthenticatorState.SignUp;
   email: string;
   password: string;
+  public loggedIn: boolean = false;
 
-  constructor() {
+  constructor(private router: Router) {
     this.email = "";
     this.password = "";
   }
@@ -19,6 +20,8 @@ export class AutheticatorComponent {
   onLoginButtonClick() {
     console.log(this.email);
     console.log(this.password);
+    this.loggedIn = true;
+    this.navigateToHome();
   }
 
   onCreateAccountClick() {
@@ -32,7 +35,6 @@ export class AutheticatorComponent {
 
   onForgotPasswordClick() {
     this.state = AuthenticatorState.ForgotPassword;
-    console.log("Forgot Password Clicked");
   }
 
   isLoginState() {
@@ -54,6 +56,10 @@ export class AutheticatorComponent {
       case AuthenticatorState.ForgotPassword:
         return "Forgot Password";
     }
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home'], { state: { email: this.email, loggedIn: true } });
   }
 }
 

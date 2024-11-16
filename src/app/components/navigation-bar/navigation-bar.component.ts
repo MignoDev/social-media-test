@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent {
-
+  @Input() data?: string;
+  @Input() loggedIn: boolean = false;
+  user: String = "User";
 }
