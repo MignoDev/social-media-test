@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { loginAuthentication } from '../../business/loginAuthentication';
 
 @Component({
   selector: 'app-autheticator',
@@ -12,7 +13,7 @@ export class AutheticatorComponent {
   password: string;
   public loggedIn: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginAuthentication: loginAuthentication) {
     this.email = "";
     this.password = "";
   }
@@ -20,8 +21,13 @@ export class AutheticatorComponent {
   onLoginButtonClick() {
     console.log(this.email);
     console.log(this.password);
-    this.loggedIn = true;
-    this.navigateToHome();
+    this.loginAuthentication.Authenticationlogin(this.email, this.password, (message: string) => {
+      if (message === 'Login successful') {
+        this.navigateToHome();
+      } else {
+        alert(message);
+      }
+    });
   }
 
   onCreateAccountClick() {

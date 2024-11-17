@@ -7,19 +7,26 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
+import { MainComponent } from './pages/main/main.component';
+
+import { loginAuthentication } from './business/loginAuthentication';
+import { PublishPostComponent } from './components/publish-post/publish-post.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
 import { AutheticatorComponent } from './tools/autheticator/autheticator.component';
+import { PostComponent } from './components/post/post.component';
 
 import { FormsModule } from '@angular/forms';
-import { MainComponent } from './pages/main/main.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { PostComponent } from './components/post/post.component';
-import { PublishPostComponent } from './components/publish-post/publish-post.component';
+
 import { MatIconModule } from '@angular/material/icon';
 import { FriendComponent } from './components/friend/friend.component';
+
+import { perfilService } from './Service/perfilService/perfilService.service';
+
+import { HttpClientModule, } from '@angular/common/http';
 
 
 @NgModule({
@@ -40,10 +47,13 @@ import { FriendComponent } from './components/friend/friend.component';
     MatBottomSheetModule,
     MatCardModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    loginAuthentication,
+    perfilService
   ],
   bootstrap: [AppComponent]
 })
