@@ -21,7 +21,8 @@ button {
 
 #home-form {
      background-color: #1a1a1a;
-     width: 90%;
+     width: fill;
+     min-width: 400px;
      display: flex;
      align-items: center;
 }
@@ -43,4 +44,19 @@ button {
      flex-direction: column;
      justify-content: center;
      text-align: center;
+}
+
+#combo-date-gender {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+}
+
+#div-input-label {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
 }

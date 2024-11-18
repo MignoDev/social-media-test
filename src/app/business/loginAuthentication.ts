@@ -1,7 +1,7 @@
-
 import { perfilService } from "../Service/perfilService/perfilService.service";
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, Type } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
      providedIn: 'root'
@@ -9,22 +9,26 @@ import { Observable } from 'rxjs';
 export class loginAuthentication {
 
      information: any = [];
-     constructor(private perfilService: perfilService) {
 
-     }
+     constructor(private perfilService: perfilService) { }
 
-     public Authenticationlogin(email: string, password: string, callback: (message: string) => void): void {
-          this.perfilService.getPerfilByEmail(email).subscribe((data: any) => {
-               this.information = JSON.parse(data);
-               console.error(this.information);
-               console.error(data);
-               if (this.information[0].email === email && this.information[0].password === password) {
-                    callback(this.information[0].email);
+     public async Authenticationlogin(email: string, password: string): Promise<string> {
+          try {
+               await firstValueFrom(this.perfilService.getPerfilByEmail(email)).then((data) => { this.information = data });
+
+               const data = JSON.parse(this.information);
+
+               if (data.length > 0) {
+                    if (data[0].password_perfil == password) {
+                         return 'Login successful';
+                    } else {
+                         return 'Login failed: Incorrect password';
+                    }
                } else {
-                    callback(this.information[0].email);
+                    return 'Login failed: User not found';
                }
-          }, (error) => {
-               callback('Wrong Email');
-          });
+          } catch (error) {
+               return 'Login failed: Error occurred';
+          }
      }
 }

@@ -11,12 +11,14 @@ import { MainComponent } from './pages/main/main.component';
 
 import { loginAuthentication } from './business/loginAuthentication';
 import { PublishPostComponent } from './components/publish-post/publish-post.component';
+import { PostComponent } from './components/post/post.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatCardModule } from '@angular/material/card';
 import { AutheticatorComponent } from './tools/autheticator/autheticator.component';
-import { PostComponent } from './components/post/post.component';
+
+import { DropdownModule } from 'primeng/dropdown';
 
 import { FormsModule } from '@angular/forms';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';

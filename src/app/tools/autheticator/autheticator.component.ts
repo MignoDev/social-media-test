@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginAuthentication } from '../../business/loginAuthentication';
+import { perfilService } from '../../Service/perfilService/perfilService.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-autheticator',
@@ -9,25 +11,50 @@ import { loginAuthentication } from '../../business/loginAuthentication';
 })
 export class AutheticatorComponent {
   state = AuthenticatorState.SignUp;
-  email: string;
-  password: string;
+  @Input() user: User;
   public loggedIn: boolean = false;
+  genders = Object.values(Gender);
+  passwordConfirmation: string;
 
-  constructor(private router: Router, private loginAuthentication: loginAuthentication) {
-    this.email = "";
-    this.password = "";
+  constructor(private router: Router, private loginAuthentication: loginAuthentication, private perfilService: perfilService) {
+    this.user = {
+      id_perfil: null,
+      nickname_perfil: null,
+      nombre_perfil: "",
+      apellido_perfil: "",
+      descripcion_perfil: "",
+      correo_perfil: "",
+      password_perfil: "",
+      fecha_nacimiento_perfil: new Date(),
+      genero_perfil: null
+    }
+    this.passwordConfirmation = "";
   }
 
-  onLoginButtonClick() {
-    console.log(this.email);
-    console.log(this.password);
-    this.loginAuthentication.Authenticationlogin(this.email, this.password, (message: string) => {
-      if (message === 'Login successful') {
-        this.navigateToHome();
-      } else {
-        alert(message);
+
+
+  async onLoginButtonClick() {
+    // console.log(this.email);
+    // console.log(this.password);
+    const message = await this.loginAuthentication.Authenticationlogin(this.user.correo_perfil, this.user.password_perfil);
+    if (message === 'Login successful') {
+      this.navigateToHome();
+    } else {
+      alert(message);
+    }
+  }
+
+  async onSignUpButtonClick() {
+    if (this.isValidEmail(this.user.correo_perfil)) {
+      if (this.user.password_perfil == this.passwordConfirmation) {
+        try {
+          await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil });
+          this.navigateToHome
+        } catch (e) {
+          alert("Error creating account");
+        }
       }
-    });
+    }
   }
 
   onCreateAccountClick() {
@@ -65,8 +92,37 @@ export class AutheticatorComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/home'], { state: { email: this.email, loggedIn: true } });
+    this.router.navigate(['/home'], { state: { email: this.user.correo_perfil, loggedIn: true } });
   }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  onGenderChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.user.genero_perfil = selectElement.value as Gender;
+  }
+
+}
+
+interface User {
+  id_perfil: number | null;
+  nickname_perfil: string | null;
+  nombre_perfil: string;
+  apellido_perfil: string;
+  descripcion_perfil: string;
+  correo_perfil: string;
+  password_perfil: string;
+  fecha_nacimiento_perfil: Date;
+  genero_perfil: Gender | null;
+}
+
+export enum Gender {
+  male = "Masculino",
+  femail = "Femenino",
+  other = "Prefiero no decirlo",
 }
 
 export enum AuthenticatorState {

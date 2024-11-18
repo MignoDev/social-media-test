@@ -1,20 +1,46 @@
 <mat-card id="home-form">
-     <form method="post" id="home-form-base">
+     <form method="post" id="home-form-base" (ngSubmit)="onSignUpButtonClick()">
           <mat-card-header style="justify-content: center;">
                <mat-card-title>
                     <h2>{{getStateText()}}</h2>
                </mat-card-title>
           </mat-card-header>
+
           <div *ngIf="isSignUpState()" id="home-form-content">
-               <input placeholder="Email" class="home-input-form" [(ngModel)]="email" name="email">
-               <input type="password" placeholder="Password" class="home-input-form" [(ngModel)]="password"
+               <input type="text" placeholder="userName" class="home-input-form" [(ngModel)]="user.nickname_perfil"
+                    name="userName">
+
+               <input placeholder="Email" class="home-input-form" [(ngModel)]="user.correo_perfil" name="emailUser">
+               <input placeholder="Nombre" type="text" class="home-input-form" [(ngModel)]="user.nombre_perfil"
+                    name="nombreUser">
+               <input placeholder="Apellido" type="text" class="home-input-form" [(ngModel)]="user.apellido_perfil"
+                    name="apellidoUser">
+               <div class="home-input-form" id="combo-date-gender">
+                    <div id="div-input-label">
+                         <label>Fecha de nacimiento</label>
+                         <input placeholder="Fecha de nacimiento" type="date" name="fecha_nacimiento"
+                              [(ngModel)]="user.fecha_nacimiento_perfil">
+                    </div>
+                    <div id="div-input-label">
+                         <label>Género</label>
+                         <select [(ngModel)]="user.genero_perfil" (change)="onGenderChange($event)" name="gender">
+                              <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                         </select>
+                    </div>
+               </div>
+               <input type="password" placeholder="Password" class="home-input-form" [(ngModel)]="user.password_perfil"
                     name="password">
-               <input type="password" placeholder="Confirm Password" class="home-input-form">
-               <button mat-raised-button color="warn" type="submit">Sign up</button>
+               <input type="password" placeholder="Confirm_Password" class="home-input-form"
+                    [(ngModel)]="passwordConfirmation" name="passwordConfirmation">
+
+
+               <button mat-raised-button color="warn" type="submit" (click)="onSignUpButtonClick()">Sign
+                    up</button>
           </div>
+
           <div *ngIf="isLoginState()" id="home-form-content">
-               <input placeholder="Email" class="home-input-form" [(ngModel)]="email" name="email">
-               <input type="password" placeholder="Password" class="home-input-form" [(ngModel)]="password"
+               <input placeholder="Email" class="home-input-form" [(ngModel)]="user.correo_perfil" name="email">
+               <input type="password" placeholder="Password" class="home-input-form" [(ngModel)]="user.password_perfil"
                     name="password">
                <button mat-raised-button color="warn" type="submit" (click)="onLoginButtonClick()">Login</button>
           </div>
