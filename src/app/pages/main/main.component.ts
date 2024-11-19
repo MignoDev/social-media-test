@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../../Service/data.service';
 
 @Component({
   selector: 'app-main',
@@ -7,11 +8,9 @@ import { Router } from '@angular/router';
   styleUrl: './main.component.css'
 })
 export class MainComponent implements OnInit {
-  email: string = "migelgames14@gmail.com";
   loggedIn: boolean = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: DataService) { }
   ngOnInit() {
-    this.email = history.state.email;
-    this.loggedIn = !history.state.loggedIn;
+    this.loggedIn = this.userService.isLoggedIn();
   }
 }

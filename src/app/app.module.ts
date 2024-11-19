@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/main/main.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 import { loginAuthentication } from './business/loginAuthentication';
 import { PublishPostComponent } from './components/publish-post/publish-post.component';
@@ -41,6 +42,7 @@ import { HttpClientModule, } from '@angular/common/http';
     PostComponent,
     PublishPostComponent,
     FriendComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

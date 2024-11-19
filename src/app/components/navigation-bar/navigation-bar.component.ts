@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../../Service/data.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -6,7 +8,14 @@ import { Component, Input } from '@angular/core';
   styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent {
-  @Input() data?: string;
-  @Input() loggedIn: boolean = false;
-  user: String = "User";
+  @Input() loggedIn: boolean = true;
+  loggedInState: boolean = true;
+
+  constructor(private router: Router, private data: DataService) {
+    this.loggedInState = this.data.isLoggedIn();
+  }
+
+  public goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }

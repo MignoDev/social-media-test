@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, Observer, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
 
 const httpOptions = {
      headers: new HttpHeaders({
@@ -24,13 +25,6 @@ export class perfilService {
           return body || {};
      }
 
-     private handleError<T>(operation = 'operation', result?: T) {
-
-          return (error: any): Observable<T> => {
-               console.log`${operation} failed: ${error.message}`;
-               return of(result as T);
-          };
-     }
 
      // Servicio CRUD de perfil
 
@@ -50,9 +44,14 @@ export class perfilService {
 
      // Crear perfil
      async createPerfil(perfil: any): Promise<any> {
-          return new Promise((resolve, reject) => {
-               this.http.post(this.url, perfil, httpOptions).toPromise()
-          });
+          try {
+               console.log(perfil);
+               const response = await lastValueFrom(this.http.post(this.url, perfil, httpOptions));
+               console.log(response);
+               return response;
+          } catch (error) {
+               throw error;
+          }
      }
 
      // Actualizar perfil

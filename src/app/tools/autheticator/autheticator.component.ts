@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { loginAuthentication } from '../../business/loginAuthentication';
 import { perfilService } from '../../Service/perfilService/perfilService.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { DataService } from '../../Service/data.service';
 
 @Component({
   selector: 'app-autheticator',
@@ -16,7 +17,7 @@ export class AutheticatorComponent {
   genders = Object.values(Gender);
   passwordConfirmation: string;
 
-  constructor(private router: Router, private loginAuthentication: loginAuthentication, private perfilService: perfilService) {
+  constructor(private router: Router, private loginAuthentication: loginAuthentication, private perfilService: perfilService, private userService: DataService) {
     this.user = {
       id_perfil: null,
       nickname_perfil: null,
@@ -48,7 +49,9 @@ export class AutheticatorComponent {
     if (this.isValidEmail(this.user.correo_perfil)) {
       if (this.user.password_perfil == this.passwordConfirmation) {
         try {
-          await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil });
+          console.log(this.user);
+          await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil, nombre_perfil: this.user.nombre_perfil, apellido_perfil: this.user.apellido_perfil, descripcion_perfil: this.user.descripcion_perfil, fecha_nacimiento_perfil: this.user.fecha_nacimiento_perfil, genero_perfil: this.user.genero_perfil });
+          this.userService.setUser(this.user);
           this.navigateToHome
         } catch (e) {
           alert("Error creating account");

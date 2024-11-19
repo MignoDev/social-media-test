@@ -1,0 +1,30 @@
+<div>
+     <app-navigation-bar></app-navigation-bar>
+     <div id="main-bar-profile">
+          <div>
+               <div>
+                    <img src="path-to-friend-picture.jpg" alt="Friend Picture" class="user-picture" />
+               </div>
+               <h2>Nombre usuario</h2>
+          </div>
+          <div id="botones-perfil">
+               <button mat-raised-button color="warn">Editar perfil</button>
+          </div>
+     </div>
+     <section>
+          <div id="main-body-profile">
+               <div class="left-profile-container">
+                    <div id="general-profile-info-container">
+                         <h3>Información general</h3>
+                         <div [hidden]="this.user.nickname_perfil == null">{{this.user.nickname_perfil}}</div>
+                         <div>{{this.user.fecha_nacimiento_perfil}}</div>
+                         <div>{{this.user.descripcion_perfil}}</div>
+                    </div>
+               </div>
+               <div class="right-profile-container">
+                    <app-publish-post></app-publish-post>
+                    <div class="post-profile-container">publicaciones</div>
+               </div>
+          </div>
+     </section>
+</div>

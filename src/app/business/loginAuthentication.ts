@@ -27,7 +27,8 @@ export class loginAuthentication {
                } else {
                     return 'Login failed: User not found';
                }
-          } catch (error) {
+          } catch (e) {
+               console.log(e);
                return 'Login failed: Error occurred';
           }
      }
