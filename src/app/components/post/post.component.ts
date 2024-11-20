@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class PostComponent {
   @Input() post: Publicacion | undefined;
+
+  goToProfile() {
+  }
 }
 
 interface Publicacion {

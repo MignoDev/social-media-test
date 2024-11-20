@@ -1,12 +1,11 @@
 <mat-card class="main-body-content">
      <mat-card-header style="width: 90%;">
-          <mat-card-title><a href="">{{this.post?.nickname_perfil}}</a></mat-card-title>
+          <mat-card-title (click)="goToProfile()" id="post-user-title">{{this.post?.nickname_perfil}}</mat-card-title>
      </mat-card-header>
      <mat-card-content id="card-content-container">
           <div class="card-content">
-               <div id="card-picture-content">
-                    <img *ngIf="this.post?.foto_publicacion" [src]="this.post?.foto_publicacion" alt="Profile picture"
-                         class="user-picture" />
+               <div *ngIf="this.post?.foto_publicacion" id="card-picture-content">
+                    <img [src]="this.post?.foto_publicacion" alt="Profile picture" class="user-picture" />
                </div>
                <div id="card-text-content">{{this.post?.texto_publicacion}}</div>
           </div>

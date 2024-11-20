@@ -1,35 +1,42 @@
-<div>
-     <app-navigation-bar></app-navigation-bar>
-     <div id="main-bar-profile">
+<app-navigation-bar></app-navigation-bar>
+<div id="main-bar-profile">
+     <div>
+          <!--
           <div>
-               <div>
-                    <img src="path-to-friend-picture.jpg" alt="Profile picture" class="user-picture" />
-               </div>
-               <h2>Nombre usuario</h2>
+               <img src="path-to-friend-picture.jpg" alt="Profile picture" class="user-picture" />
           </div>
-          <div id="botones-perfil">
-               <button mat-raised-button color="warn">Editar perfil</button>
+          --->
+          <h2>{{this.user.nickname_perfil}}</h2>
+
+     </div>
+     <div id="botones-perfil">
+          <button mat-raised-button color="warn">Editar perfil</button>
+     </div>
+</div>
+<section class="section-body">
+     <div id="main-body-profile">
+          <div class="left-profile-container">
+               <div id="general-profile-info-container">
+                    <h3>Información general</h3>
+                    <h4>Usuario</h4>
+                    <div>{{this.user.nickname_perfil}}</div>
+                    <h4>Nombre</h4>
+                    <div>Nombre: {{this.user.nombre_perfil}} {{this.user.apellido_perfil}}</div>
+                    <h4>Fecha de nacimiento</h4>
+                    <div>Fecha de nacimiento: {{this.user.fecha_nacimiento_perfil}}</div>
+                    <h4>Descripcion</h4>
+                    <div>{{this.user.descripcion_perfil}}</div>
+                    <br>
+               </div>
+          </div>
+          <div class="right-profile-container">
+               <app-publish-post class="post-profile-container"></app-publish-post>
+               <div class="post-profile-container">publicaciones</div>
+               <br>
+               <div *ngFor="let post of this.posts" class="posts-continer">
+                    <app-post [post]="post" class="posts-continer"></app-post>
+                    <br>
+               </div>
           </div>
      </div>
-     <section>
-          <div id="main-body-profile">
-               <div class="left-profile-container">
-                    <div id="general-profile-info-container">
-                         <h3>Información general</h3>
-                         <div [hidden]="this.user.nickname_perfil == null">{{this.user.nickname_perfil}}</div>
-                         <div>{{this.user.fecha_nacimiento_perfil}}</div>
-                         <div>{{this.user.descripcion_perfil}}</div>
-                    </div>
-               </div>
-               <div class="right-profile-container">
-                    <app-publish-post></app-publish-post>
-                    <div class="post-profile-container">publicaciones</div>
-                    <div *ngFor="let post of this.posts">
-                         <div class="post">
-                              <app-post [post]="post"></app-post>
-                         </div>
-                    </div>
-               </div>
-          </div>
-     </section>
-</div>
+</section>
