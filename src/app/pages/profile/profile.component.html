@@ -3,7 +3,7 @@
      <div id="main-bar-profile">
           <div>
                <div>
-                    <img src="path-to-friend-picture.jpg" alt="Friend Picture" class="user-picture" />
+                    <img src="path-to-friend-picture.jpg" alt="Profile picture" class="user-picture" />
                </div>
                <h2>Nombre usuario</h2>
           </div>
@@ -24,6 +24,11 @@
                <div class="right-profile-container">
                     <app-publish-post></app-publish-post>
                     <div class="post-profile-container">publicaciones</div>
+                    <div *ngFor="let post of this.posts">
+                         <div class="post">
+                              <app-post [post]="post"></app-post>
+                         </div>
+                    </div>
                </div>
           </div>
      </section>

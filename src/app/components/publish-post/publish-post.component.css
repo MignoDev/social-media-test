@@ -1,7 +1,7 @@
 #publish-post-form-group {
      display: flex;
      flex-direction: column;
-     width: 98%;
+     width: 90%;
      margin: 0 0 0.5rem 0;
 }
 
@@ -35,7 +35,7 @@
      justify-content: center;
      align-items: center;
      background-color: #1a1a1a;
-     width: 60%;
+     width: 80%;
      color: #ffffff;
      border-radius: 8px;
 }
@@ -45,7 +45,7 @@
      flex-direction: column;
      justify-content: center;
      align-items: center;
-     width: 100%;
+     width: 80%;
      padding: 0.5rem 0.5rem;
      margin: 0.5rem 0.5rem;
 }

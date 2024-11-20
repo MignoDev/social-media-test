@@ -1,0 +1,108 @@
+/* General styles */
+body {
+     font-family: Arial, sans-serif;
+     background-color: #101010;
+     color: #ffffff;
+     margin: 0;
+     padding: 0;
+}
+
+#main-bar-profile {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background-color: #1a1a1a;
+     padding: 1rem;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+     margin-bottom: 1rem;
+     border-radius: 8px;
+}
+
+#main-bar-profile img {
+     border-radius: 50%;
+     width: 150px;
+     height: 150px;
+     object-fit: cover;
+     margin-bottom: 1rem;
+}
+
+#main-bar-profile h2 {
+     margin: 0;
+     font-size: 1.5rem;
+     color: #ffffff;
+}
+
+#botones-perfil {
+     margin-top: 1rem;
+}
+
+#main-body-profile {
+     display: flex;
+     justify-content: center;
+     padding: 1rem;
+     gap: 1rem;
+     max-width: 1200px;
+     /* Set a maximum width for the main container */
+     margin: 0 auto;
+     /* Center the main container */
+}
+
+.left-profile-container {
+     background-color: #1a1a1a;
+     padding: 1rem;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+     border-radius: 8px;
+     flex: 1;
+     max-width: 20%;
+}
+
+.right-profile-container {
+     background-color: #1a1a1a;
+     padding: 1rem;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+     border-radius: 8px;
+     flex: 4;
+     max-width: 80%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     /* Center vertically */
+     align-items: center;
+     /* Center horizontally */
+}
+
+#general-profile-info-container h3 {
+     margin-top: 0;
+     color: #ffffff;
+}
+
+.post-profile-container {
+     margin-top: 1rem;
+     width: 100%;
+     /* Ensure it takes up the full width of the container */
+}
+
+.post {
+     background-color: #1a1a1a;
+     padding: 1rem;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+     border-radius: 8px;
+     align-content: center;
+     margin-bottom: 1rem;
+     width: 100%;
+     /* Ensure it takes up the full width of the container */
+     color: #ffffff;
+     /* Ensure text color is white */
+}
+
+@media (max-width: 768px) {
+     #main-body-profile {
+          flex-direction: column;
+          align-items: center;
+     }
+
+     .left-profile-container,
+     .right-profile-container {
+          max-width: 100%;
+     }
+}

@@ -18,4 +18,8 @@ export class NavigationBarComponent {
   public goToProfile() {
     this.router.navigate(['/profile']);
   }
+
+  public goToMain() {
+    this.router.navigate(['/home']);
+  }
 }

@@ -35,9 +35,6 @@ export class PublicacionesService {
      // Servicio CRUD de publicaciones
 
      // Listar publicaciones
-     getPublicaciones(): Observable<any> {
-          return this.http.get(this.url, httpOptions);
-     }
 
      // leer publicacion por id
      getPublicacion(id: any): Observable<any> {
@@ -56,4 +53,18 @@ export class PublicacionesService {
           return this.http.put(this.url + "/", cadena, httpOptions).toPromise();
      }
 
+     getPostsByUserId(userId: number): Observable<any> {
+          return this.http.get(this.url + "/amigos/" + userId, httpOptions);
+     }
+
+     getPublicaciones(id_perfil: number): Observable<any> {
+          return this.http.get(`${this.url}/perfil/${id_perfil}`);
+     }
+
+}
+
+interface Publicacion {
+     nickname_perfil: string;
+     texto_publicacion: string;
+     foto_publicacion: string | null;
 }

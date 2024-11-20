@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationBarComponent } from '../../components/navigation-bar/navigation-bar.component';
 import { DataService } from '../../Service/data.service';
+import { PublicacionesService } from '../../Service/publicacionesService/publicacionesService.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   user: User = {
     id_perfil: null,
@@ -21,14 +22,37 @@ export class ProfileComponent {
     genero_perfil: null
   };
 
-  constructor(private data: DataService) { }
+  posts: Publicacion[] = [];
+
+  constructor(private dataService: DataService, private publicacionService: PublicacionesService) { }
 
   ngOnInit() {
-    this.user = this.data.getUser();
+    this.user = this.dataService.getUser();
     console.log(this.user);
+    this.loadPublicaciones(this.user.id_perfil!);
   }
 
+  loadPublicaciones(id_perfil: number): void {
+    this.publicacionService.getPublicaciones(id_perfil).subscribe(publicaciones => {
+      const posts = JSON.parse(publicaciones);
+      if (Array.isArray(posts)) {
+        this.posts = posts.map(publicacion => ({
+          ...publicacion,
+          foto_publicacion: publicacion.foto_publicacion ? `data:image/jpeg;base64,${publicacion.foto_publicacion}` : null
 
+        }));
+        console.log(this.posts);
+      } else {
+        console.error('La respuesta no es un array:', typeof publicaciones);
+      }
+    }, error => {
+      console.error('Error al obtener publicaciones:', error);
+    });
+  }
+
+  saveProfile(): void {
+    this.dataService.setUser(this.user);
+  }
 }
 
 interface User {
@@ -45,6 +69,12 @@ interface User {
 
 export enum Gender {
   male = "Masculino",
-  femail = "Femenino",
+  female = "Femenino",
   other = "Prefiero no decirlo",
+}
+
+interface Publicacion {
+  nickname_perfil: string;
+  texto_publicacion: string;
+  foto_publicacion: string | null;
 }

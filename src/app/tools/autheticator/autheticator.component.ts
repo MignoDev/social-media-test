@@ -51,7 +51,6 @@ export class AutheticatorComponent {
         try {
           console.log(this.user);
           await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil, nombre_perfil: this.user.nombre_perfil, apellido_perfil: this.user.apellido_perfil, descripcion_perfil: this.user.descripcion_perfil, fecha_nacimiento_perfil: this.user.fecha_nacimiento_perfil, genero_perfil: this.user.genero_perfil });
-          this.userService.setUser(this.user);
           this.navigateToHome
         } catch (e) {
           alert("Error creating account");

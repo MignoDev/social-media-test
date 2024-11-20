@@ -4,24 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-  private user: User = {
-    id_perfil: null,
-    nickname_perfil: null,
-    nombre_perfil: null,
-    apellido_perfil: null,
-    descripcion_perfil: null,
-    correo_perfil: null,
-    password_perfil: null,
-    fecha_nacimiento_perfil: null,
-    genero_perfil: null
-  };
-
-  private friends: any[] = [];
+  private user: User = this.loadUserFromLocalStorage();
+  private friends: any[] = this.loadFriendsFromLocalStorage();
 
   constructor() { }
 
   setUser(user: User): void {
     this.user = user;
+    this.saveUserToLocalStorage();
   }
 
   getUser(): User {
@@ -29,7 +19,7 @@ export class DataService {
   }
 
   isLoggedIn(): boolean {
-    return this.user !== null;
+    return this.user.id_perfil !== null;
   }
 
   clearUser(): void {
@@ -44,10 +34,12 @@ export class DataService {
       fecha_nacimiento_perfil: null,
       genero_perfil: null
     };
+    this.saveUserToLocalStorage();
   }
 
   setFriends(friends: any[]): void {
     this.friends = friends;
+    this.saveFriendsToLocalStorage();
   }
 
   getFriends(): any[] {
@@ -56,15 +48,52 @@ export class DataService {
 
   clearFriends(): void {
     this.friends = [];
+    this.saveFriendsToLocalStorage();
   }
 
   addFriend(friend: any): void {
     this.friends.push(friend);
     this.friends.sort((a, b) => a.nombre_perfil.localeCompare(b.nombre_perfil));
+    this.saveFriendsToLocalStorage();
   }
 
   removeFriend(friend: any): void {
     this.friends = this.friends.filter(f => f.id_perfil !== friend.id_perfil);
+    this.saveFriendsToLocalStorage();
+  }
+
+  private saveUserToLocalStorage(): void {
+    localStorage.setItem('user', JSON.stringify(this.user));
+  }
+
+  private loadUserFromLocalStorage(): User {
+    const data = localStorage.getItem('user');
+    if (data) {
+      return JSON.parse(data);
+    }
+    return {
+      id_perfil: null,
+      nickname_perfil: null,
+      nombre_perfil: null,
+      apellido_perfil: null,
+      descripcion_perfil: null,
+      correo_perfil: null,
+      password_perfil: null,
+      fecha_nacimiento_perfil: null,
+      genero_perfil: null
+    };
+  }
+
+  private saveFriendsToLocalStorage(): void {
+    localStorage.setItem('friends', JSON.stringify(this.friends));
+  }
+
+  private loadFriendsFromLocalStorage(): any[] {
+    const data = localStorage.getItem('friends');
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [];
   }
 }
 
@@ -82,6 +111,6 @@ interface User {
 
 export enum Gender {
   male = "Masculino",
-  femail = "Femenino",
+  female = "Femenino",
   other = "Prefiero no decirlo",
 }

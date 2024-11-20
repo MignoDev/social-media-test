@@ -3,7 +3,10 @@
      <div class="main-sections" id="left-main-section">Left Column</div>
      <div class="main-sections">
           <app-publish-post id="publish-post-container" />
-          <app-post class="main-sections" />
+          <div *ngFor="let post of posts" class="main-sections">
+               <app-post class="main-sections" id="genera-post" [post]="post" />
+               <br>
+          </div>
      </div>
      <div class="main-sections" id="right-main-section">
           <app-friend />

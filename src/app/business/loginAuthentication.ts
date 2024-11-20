@@ -2,6 +2,7 @@ import { perfilService } from "../Service/perfilService/perfilService.service";
 import { Injectable, Type } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { DataService } from "../Service/data.service";
 
 @Injectable({
      providedIn: 'root'
@@ -10,7 +11,7 @@ export class loginAuthentication {
 
      information: any = [];
 
-     constructor(private perfilService: perfilService) { }
+     constructor(private perfilService: perfilService, private data: DataService) { }
 
      public async Authenticationlogin(email: string, password: string): Promise<string> {
           try {
@@ -20,6 +21,8 @@ export class loginAuthentication {
 
                if (data.length > 0) {
                     if (data[0].password_perfil == password) {
+                         console.log(data[0]);
+                         this.data.setUser(data[0]);
                          return 'Login successful';
                     } else {
                          return 'Login failed: Incorrect password';
