@@ -50,3 +50,7 @@
 #username:hover {
      cursor: pointer;
 }
+
+#logout {
+     cursor: pointer;
+}

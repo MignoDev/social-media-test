@@ -21,6 +21,15 @@ export class NavigationBarComponent {
   }
 
   public goToMain() {
-    this.router.navigate(['/home']);
+    if (this.loggedInState) {
+      this.router.navigate(['/home']);
+    }
   }
+
+  public logOut() {
+    this.data.clearUser();
+    this.data.clearFriends();
+    this.router.navigate(['/']);
+  }
+
 }

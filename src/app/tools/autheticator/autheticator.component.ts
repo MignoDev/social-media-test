@@ -50,7 +50,7 @@ export class AutheticatorComponent {
       if (this.user.password_perfil == this.passwordConfirmation) {
         try {
           console.log(this.user);
-          await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil, nombre_perfil: this.user.nombre_perfil, apellido_perfil: this.user.apellido_perfil, descripcion_perfil: this.user.descripcion_perfil, fecha_nacimiento_perfil: this.user.fecha_nacimiento_perfil, genero_perfil: this.user.genero_perfil });
+          await this.perfilService.createPerfil({ correo_perfil: this.user.correo_perfil, password_perfil: this.user.password_perfil, nombre_perfil: this.user.nombre_perfil, apellido_perfil: this.user.apellido_perfil, descripcion_perfil: this.user.descripcion_perfil, fecha_nacimiento_perfil: this.user.fecha_nacimiento_perfil, genero_perfil: this.user.genero_perfil, nickname_perfil: this.user.nickname_perfil });
           this.navigateToHome
         } catch (e) {
           alert("Error creating account");
