@@ -1,6 +1,6 @@
 <app-navigation-bar [loggedIn]="this.loggedIn" [ngClass]={loggedIn} />
 <div id="main-body-grid">
-     <div class="main-sections" id="left-main-section">Left Column</div>
+     <div class="main-sections" id="left-main-section"></div>
      <div class="main-sections">
           <app-publish-post id="publish-post-container" />
           <div *ngFor="let post of posts" class="main-sections">
@@ -9,6 +9,8 @@
           </div>
      </div>
      <div class="main-sections" id="right-main-section">
-          <app-friend />
+          <div *ngFor="let friend of this.friends">
+               <app-friend [friend]="friend" />
+          </div>
      </div>
 </div>

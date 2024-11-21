@@ -35,7 +35,7 @@ export class AmigosService {
      // Servicio CRUD de amigos
 
      // Listar amigos
-     getAmigos(): Observable<any> {
+     getAmigos(userId: any): Observable<any> {
           return this.http.get(this.url, httpOptions);
      }
 
@@ -43,6 +43,11 @@ export class AmigosService {
      getAmigo(id: any): Observable<any> {
           return this.http.get(this.url + "/" + id, httpOptions);
      }
+
+     getAmigoUsuario(id: any): Observable<any> {
+          return this.http.get(this.url + "/amigos/" + id, httpOptions);
+     }
+
 
      // Crear amigo
      async createAmigo(amigo: any): Promise<any> {

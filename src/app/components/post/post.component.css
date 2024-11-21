@@ -6,9 +6,9 @@
      background-color: #1a1a1a;
      box-sizing: border-box;
      width: 70%;
+     min-width: 400px;
      color: #ffffff;
      min-height: 100px;
-     max-height: 500px;
      padding: 1rem;
 }
 
@@ -58,11 +58,69 @@
 
 .user-picture {
      width: 100%;
-     height: 100%;
+     height: 500px;
      object-fit: cover;
 }
 
 #post-user-title:hover {
      cursor: pointer;
      /* Aquí puedes agregar los estilos para el hover */
+}
+
+#footer-post-section {
+     display: flex;
+     flex-direction: row;
+}
+
+.white-divider {
+     background-color: white;
+}
+
+.comments-container {
+     display: flex;
+     flex-direction: column;
+     justify-content: left;
+     align-items: start;
+     width: 100%;
+     height: fit-content;
+     margin: 0.2rem 0;
+     padding: 10px;
+     box-sizing: border-box;
+     background-color: #1a1a1a;
+     border-radius: 10px;
+}
+
+#form-comment {
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     margin: 0.2rem 0;
+     padding: 10px;
+     box-sizing: border-box;
+     background-color: #1a1a1a;
+     border-radius: 10px;
+}
+
+.comments-container-general {
+     display: flex;
+     flex-direction: column;
+     justify-content: left;
+     align-items: start;
+     width: 100%;
+     padding: 0.5rem;
+     box-sizing: border-box;
+     background-color: #101010;
+     border-radius: 10px;
+}
+
+#comment {
+     margin: 10px;
+     max-lines: 3;
+     height: auto;
+     max-width: 100%;
+     resize: vertical;
+     border-radius: 10px;
+     padding: 0.5rem 0.5rem;
 }

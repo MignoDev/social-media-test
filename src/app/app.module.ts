@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 import { FriendComponent } from './components/friend/friend.component';
 
 import { perfilService } from './Service/perfilService/perfilService.service';
@@ -52,12 +53,14 @@ import { HttpClientModule, } from '@angular/common/http';
     MatCardModule,
     FormsModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule,
   ],
   providers: [
     provideAnimationsAsync(),
     loginAuthentication,
-    perfilService
+    perfilService,
+    FormsModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, Observer, of } from 'rxjs';
+import { Observable, throwError, Observer, of, lastValueFrom } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 const httpOptions = {
@@ -46,9 +46,13 @@ export class ComentariosService {
 
      // Crear comentario
      async createComentario(comentario: any): Promise<any> {
-          return new Promise((resolve, reject) => {
-               this.http.post(this.url, comentario, httpOptions).toPromise()
-          });
+          try {
+               const response = await lastValueFrom(this.http.post(this.url, comentario, httpOptions));
+               console.log(response);
+               return response;
+          } catch (error) {
+               throw error;
+          }
      }
 
      // Actualizar comentario

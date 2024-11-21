@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit {
         this.posts = posts.map(publicacion => ({
           ...publicacion,
           foto_publicacion: publicacion.foto_publicacion ? `data:image/jpeg;base64,${publicacion.foto_publicacion}` : null
-
         }));
         console.log(this.posts);
       } else {
@@ -74,6 +73,7 @@ export enum Gender {
 }
 
 interface Publicacion {
+  id_publicacion: number;
   nickname_perfil: string;
   texto_publicacion: string;
   foto_publicacion: string | null;

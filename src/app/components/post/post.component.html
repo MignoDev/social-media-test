@@ -4,14 +4,48 @@
      </mat-card-header>
      <mat-card-content id="card-content-container">
           <div class="card-content">
-               <div *ngIf="this.post?.foto_publicacion" id="card-picture-content">
-                    <img [src]="this.post?.foto_publicacion" alt="Profile picture" class="user-picture" />
+               <div>
+                    <div *ngIf="this.post?.foto_publicacion" id="card-picture-content">
+                         <img [src]="this.post?.foto_publicacion" alt="Profile picture" class="user-picture" />
+                    </div>
+                    <div id="card-text-content">
+                         <p>{{this.post?.texto_publicacion}}</p>
+                    </div>
                </div>
-               <div id="card-text-content">{{this.post?.texto_publicacion}}</div>
+          </div>
+          <div [hidden]="this.hideComments" class="comments-container-general">
+               <h3>comentarios</h3>
+               <div class="comments-container" *ngFor="let comment of this.comments">
+                    <div class="comment">
+                         <div class="comment-user">
+                              <h4>{{comment.nickname_perfil}}</h4>
+                         </div>
+                         <div class="comment-text">
+                              <p>{{comment.texto_comentario}}</p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <br>
+          <div id="comment-section">
+               <form [hidden]="this.hideComments" id="form-comment">
+                    <textarea id="comment" placeholder="Escribe tu comentario..." [(ngModel)]="comment"
+                         name="comment"></textarea>
+                    <button mat-button color="Basic" (click)="postComment()">Comentar</button>
+               </form>
           </div>
      </mat-card-content>
-     <mat-card-actions>
-          <button mat-button>REACT</button>
-          <button mat-button>COMMENT</button>
+     <mat-card-actions id="footer-post-section">
+          <button mat-button>
+               <mat-icon>thumb_up</mat-icon>
+          </button>
+          <button mat-button>
+               <mat-icon>thumb_down</mat-icon>
+          </button>
+          <button mat-button (click)="openComents()">
+               <mat-icon>comment</mat-icon>
+               COMENTAR
+          </button>
      </mat-card-actions>
+
 </mat-card>

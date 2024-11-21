@@ -44,7 +44,7 @@ export class PublicacionesService {
      // Crear publicacion
      async createPublicacion(publicacion: any): Promise<any> {
           return new Promise((resolve, reject) => {
-               this.http.post(this.url, publicacion, httpOptions).toPromise()
+               this.http.post(this.url + '/publicaciones', publicacion, httpOptions)
           });
      }
 
