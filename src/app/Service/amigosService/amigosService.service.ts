@@ -51,9 +51,14 @@ export class AmigosService {
 
      // Crear amigo
      async createAmigo(amigo: any): Promise<any> {
+          console.log('Creating amigo with data:', amigo);
+
+          if (!amigo.id_perfil_amigo) {
+               throw new Error('id_perfil_amigo is required');
+          }
+
           try {
                const response = await this.http.post(this.url, amigo, httpOptions).toPromise();
-               console.error(response);
                return response;
           } catch (error) {
                console.error('Error creating amigo', error);

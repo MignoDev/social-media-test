@@ -55,7 +55,7 @@ export class PublicacionesService {
 
      // Actualizar publicacion
      async updatePublicacion(cadena: any): Promise<any> {
-          return this.http.put(this.url + "/", cadena, httpOptions).toPromise();
+          return this.http.put(this.url + "/", cadena, httpOptions)
      }
 
      getPostsByUserId(userId: number): Observable<any> {

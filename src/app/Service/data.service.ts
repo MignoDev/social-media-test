@@ -53,12 +53,8 @@ export class DataService {
     this.saveFriendsToLocalStorage();
   }
 
-  addFriend(friend: any): void {
-    console.error(friend);
-    this.amigosService.createAmigo({ id_perfil: friend.id_perfil, id_perfil_amigo: friend.id_perfil_amigo, estado_solicitud: friend.estado_solicitud });
-    this.friends.push(friend);
-    this.friends.sort((a, b) => a.nombre_perfil.localeCompare(b.nombre_perfil));
-    this.saveFriendsToLocalStorage();
+  addFriend(amigo: any): Promise<any> {
+    return this.amigosService.createAmigo(amigo);
   }
 
   removeFriend(friend: any): void {

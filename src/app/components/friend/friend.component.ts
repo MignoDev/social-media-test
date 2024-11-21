@@ -30,11 +30,11 @@ export class FriendComponent implements OnInit {
 
   action() {
     if (this.message === 'dejar de seguir') {
-      console.log(this.userService.getUser().id_perfil! + 'hello');
+      console.log(this.friend);
       this.userService.clearPosibleFriends(this.userService.getUser().id_perfil!, this.friendId!);
       this.message = 'seguir';
     } else if (this.message === 'seguir') {
-      console.log(this.friendId! + 'hello');
+
       this.userService.addFriend({
         id_perfil: this.userService.getUser().id_perfil!,
         id_perfil_amigo: this.friendId!,
