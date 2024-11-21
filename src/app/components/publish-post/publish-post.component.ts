@@ -11,6 +11,7 @@ export class PublishPostComponent {
   fileName = '';
   selectedFile: File | null = null;
   postDescription: string = '';
+  post: Publicacion | null = null;
 
   constructor(private publicacionesService: PublicacionesService, private dataService: DataService) { }
 
@@ -23,19 +24,34 @@ export class PublishPostComponent {
     }
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
-    if (this.selectedFile || this.postDescription) {
-      const formData = new FormData();
-      formData.append('id_perfil', this.dataService.getUser().id_perfil?.toString() || '');
-      if (this.selectedFile) {
-        formData.append('foto_publicacion', this.selectedFile, this.selectedFile.name);
-      }
-      formData.append('texto_publicacion', this.postDescription);
-
-      this.publicacionesService.createPublicacion(formData)
-    } else {
-      console.error('File or description not provided');
+  async onSubmit() {
+    console.log('submit');
+    this.post = {
+      id_perfil: this.dataService.getUser().id_perfil || 0,
+      texto_publicacion: this.postDescription
     }
+    await this.publicacionesService.createPublicacion(this.post);
   }
+  /*
+    onSubmit(event: Event) {
+      event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+      if (this.selectedFile || this.postDescription) {
+        const formData = new FormData();
+        formData.append('id_perfil', this.dataService.getUser().id_perfil?.toString() || '');
+        if (this.selectedFile) {
+          formData.append('foto_publicacion', this.selectedFile, this.selectedFile.name);
+        }
+        formData.append('texto_publicacion', this.postDescription);
+  
+        this.publicacionesService.createPublicacion(formData)
+      } else {
+        console.error('File or description not provided');
+      }
+    }
+    */
+}
+
+interface Publicacion {
+  id_perfil: number;
+  texto_publicacion: string;
 }

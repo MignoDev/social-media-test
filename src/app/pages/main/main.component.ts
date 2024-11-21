@@ -14,12 +14,17 @@ export class MainComponent implements OnInit {
 
   posts: Publicacion[] = [];
   friends: any[] = [];
+  posibleFriends: any[] = [];
   constructor(private router: Router, private userService: DataService, private publicacionService: PublicacionesService, private amigosService: AmigosService) { }
   ngOnInit() {
     this.loggedIn = this.userService.isLoggedIn();
     this.loadPublicaciones(this.userService.getUser().id_perfil!);
     this.loadFriends();
+    this.loadPosibleFriends();
     this.friends = this.userService.getFriends();
+
+    this.posibleFriends = this.userService.getPosibleFriends();
+
   }
 
   loadFriends(): void {
@@ -36,16 +41,25 @@ export class MainComponent implements OnInit {
     });
   }
 
+  loadPosibleFriends(): void {
+    this.amigosService.getAmigo(this.userService.getUser().id_perfil!).subscribe(amigos => {
+      const posibleFriends = JSON.parse(amigos);
+      console.error(posibleFriends);
+      if (Array.isArray(posibleFriends)) {
+        this.posibleFriends = posibleFriends;
+        this.userService.setPosibleFriends(posibleFriends);
+      } else {
+        console.error('La respuesta no es un array:', typeof posibleFriends);
+      }
+    });
+  }
+
   loadPublicaciones(id_perfil: number): void {
     this.publicacionService.getPostsByUserId(id_perfil).subscribe(publicaciones => {
       const posts = JSON.parse(publicaciones);
+      console.log(posts);
       if (Array.isArray(posts)) {
-        this.posts = posts.map(publicacion => ({
-          ...publicacion,
-          foto_publicacion: publicacion.foto_publicacion ? `data:image/jpeg;base64,${publicacion.foto_publicacion}` : null
-
-        }));
-        console.log(this.posts);
+        this.posts = posts;
       } else {
         console.error('La respuesta no es un array:', typeof publicaciones);
       }

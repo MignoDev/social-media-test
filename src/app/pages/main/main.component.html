@@ -1,6 +1,11 @@
 <app-navigation-bar [loggedIn]="this.loggedIn" [ngClass]={loggedIn} />
 <div id="main-body-grid">
-     <div class="main-sections" id="left-main-section"></div>
+     <div class="main-sections" id="left-main-section">
+          <div *ngFor="let friend of this.posibleFriends">
+               <app-friend [friend]="friend" />
+          </div>
+
+     </div>
      <div class="main-sections">
           <app-publish-post id="publish-post-container" />
           <div *ngFor="let post of posts" class="main-sections">

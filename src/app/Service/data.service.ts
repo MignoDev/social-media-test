@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AmigosService } from './amigosService/amigosService.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,8 +7,9 @@ import { Injectable } from '@angular/core';
 export class DataService {
   private user: User = this.loadUserFromLocalStorage();
   private friends: any[] = this.loadFriendsFromLocalStorage();
+  private posibleFriends: any[] = this.loadPosibleFriendsFromLocalStorage();
 
-  constructor() { }
+  constructor(private amigosService: AmigosService) { }
 
   setUser(user: User): void {
     this.user = user;
@@ -52,6 +54,8 @@ export class DataService {
   }
 
   addFriend(friend: any): void {
+    console.error(friend);
+    this.amigosService.createAmigo({ id_perfil: friend.id_perfil, id_perfil_amigo: friend.id_perfil_amigo, estado_solicitud: friend.estado_solicitud });
     this.friends.push(friend);
     this.friends.sort((a, b) => a.nombre_perfil.localeCompare(b.nombre_perfil));
     this.saveFriendsToLocalStorage();
@@ -94,6 +98,33 @@ export class DataService {
       return JSON.parse(data);
     }
     return [];
+  }
+
+  private savePosibleFriendsToLocalStorage(): void {
+    localStorage.setItem('posibleFriends', JSON.stringify(this.posibleFriends));
+  }
+
+  private loadPosibleFriendsFromLocalStorage(): any[] {
+    const data = localStorage.getItem('posibleFriends');
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [];
+  }
+
+  setPosibleFriends(posibleFriends: any[]): void {
+    this.posibleFriends = posibleFriends;
+    this.savePosibleFriendsToLocalStorage();
+  }
+
+  getPosibleFriends(): any[] {
+    return this.posibleFriends;
+  }
+
+  clearPosibleFriends(id_perfil: number, id_perfil_amigo: number): void {
+    this.posibleFriends = [];
+    this.savePosibleFriendsToLocalStorage();
+    this.amigosService.deleteAmigo(id_perfil, id_perfil_amigo);
   }
 }
 

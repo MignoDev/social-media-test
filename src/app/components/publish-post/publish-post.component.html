@@ -1,13 +1,14 @@
 <div id="publish-post-form">
-     <form id="publish-form" (submit)="onSubmit($event)">
+     <form id="publish-form" (submit)="onSubmit()">
           <div id="publish-post-form-group">
                <input type="text" id="post-description" name="post-description" [(ngModel)]="postDescription"
                     placeholder="Enter description" />
           </div>
           <div id="publish-post-buttons">
                <div id="publish-file-container">
-                    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
                     <!--
+                    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                    
                     <div class="file-upload">
                          {{fileName || ""}}
                          <button mat-mini-fab color="disabled" class="upload-btn" (click)="fileUpload.click()"

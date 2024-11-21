@@ -51,14 +51,23 @@ export class AmigosService {
 
      // Crear amigo
      async createAmigo(amigo: any): Promise<any> {
-          return new Promise((resolve, reject) => {
-               this.http.post(this.url, amigo, httpOptions).toPromise()
-          });
+          try {
+               const response = await this.http.post(this.url, amigo, httpOptions).toPromise();
+               console.error(response);
+               return response;
+          } catch (error) {
+               console.error('Error creating amigo', error);
+               throw error;
+          }
      }
 
      // Actualizar amigo
      async updateAmigo(cadena: any): Promise<any> {
           return this.http.put(this.url + "/", cadena, httpOptions).toPromise();
+     }
+
+     deleteAmigo(id_perfil: any, id_perfil_amigo: any): Observable<any> {
+          return this.http.delete(this.url + "/" + id_perfil + "/" + id_perfil_amigo, httpOptions);
      }
 
 }
