@@ -46,3 +46,7 @@
 .user-picture:hover {
      cursor: pointer;
 }
+
+#username:hover {
+     cursor: pointer;
+}

@@ -10,6 +10,7 @@ import { DataService } from '../../Service/data.service';
 export class NavigationBarComponent {
   @Input() loggedIn: boolean = true;
   loggedInState: boolean = true;
+  username: string | null = this.data.getUser().nickname_perfil;
 
   constructor(private router: Router, private data: DataService) {
     this.loggedInState = this.data.isLoggedIn();
